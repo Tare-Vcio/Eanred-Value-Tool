@@ -5,22 +5,6 @@
 const addNewTaskButton = document.querySelector("#add-new-task-btn");
 const submitButton = document.querySelector("#submit-btn");
 const taskListElement = document.querySelector("#task-list");
-const newTaskHTML = `
-    <table class="task-item">
-        <tr>
-        <th>Scheduled progress (%)</th>
-        <th>Actual progress (%)</th>
-        <th>Budget (VND)</th>
-        <th>Cost (VND)</th>
-        </tr>
-        <tr>
-        <td><input type="text" class="scheduled-progress-input" /></td>
-        <td><input type="text" class="actual-progress-input" /></td>
-        <td><input type="text" class="budget-input" /></td>
-        <td><input type="text" class="cost-input" /></td>
-        </tr>
-    </table>
-`;
 //#endregion
 
 //#region Các biến chứa giá trị tính toán
@@ -68,7 +52,31 @@ let projectedBudgetOverrunResultElement = document.querySelector(
 
 // 1. LNSK click button Add new task
 addNewTaskButton.onclick = function (event) {
+  let currentTaskNumberLS = localStorage.getItem("currentTaskNumber");
+  let currentTaskNumber = currentTaskNumberLS ? Number(currentTaskNumberLS) : 1;
+
+  const newTaskHTML = `
+    <div class="task-item">
+    <h2 class="task-item__label">Task ${++currentTaskNumber}</h2>
+    <table class="task-item__table">
+    <tr>
+    <th>Scheduled progress (%)</th>
+    <th>Actual progress (%)</th>
+    <th>Budget (VND)</th>
+    <th>Cost (VND)</th>
+    </tr>
+    <tr>
+    <td><input type="text" class="scheduled-progress-input" /></td>
+    <td><input type="text" class="actual-progress-input" /></td>
+    <td><input type="text" class="budget-input" /></td>
+    <td><input type="text" class="cost-input" /></td>
+    </tr>
+    </table>
+    </div>
+  `;
   taskListElement.innerHTML += newTaskHTML;
+
+  localStorage.setItem("currentTaskNumber", currentTaskNumber);
 };
 
 // 2. LNSK click button SUBMIT
@@ -174,6 +182,4 @@ function showCalculationResults() {
 // CSS lại trang chủ
 // Thêm mô tả và hướng dẫn dùng tool (nếu có) vào file guide.html
 
-// 6. Hiển thị label số thự tự task (Tuấn)
-
-// 7. Deploy website ? (Tuấn ?)
+// 6. Deploy website ? (Tuấn ?)

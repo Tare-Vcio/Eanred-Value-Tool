@@ -79,18 +79,13 @@ main h1 {
 }
 
 .task-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.scheduled-progress-input {
-}
-
-.actual-progress-input {
-}
-
-.budget-input {
-}
-
-.cost-input {
+.task-item__label {
+  margin-right: 50px;
 }
 
 #add-new-task-btn,

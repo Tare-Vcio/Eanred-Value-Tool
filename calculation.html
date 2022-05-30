@@ -11,20 +11,23 @@
     <main>
       <h1>Earned Value Analysis Tool</h1>
       <div id="task-list">
-        <table class="task-item">
-          <tr>
-            <th>Scheduled progress (%)</th>
-            <th>Actual progress (%)</th>
-            <th>Budget (VND)</th>
-            <th>Cost (VND)</th>
-          </tr>
-          <tr>
-            <td><input type="text" class="scheduled-progress-input" /></td>
-            <td><input type="text" class="actual-progress-input" /></td>
-            <td><input type="text" class="budget-input" /></td>
-            <td><input type="text" class="cost-input" /></td>
-          </tr>
-        </table>
+        <div class="task-item">
+          <h2 class="task-item__label">Task 1</h2>
+          <table class="task-item__table">
+            <tr>
+              <th>Scheduled progress (%)</th>
+              <th>Actual progress (%)</th>
+              <th>Budget (VND)</th>
+              <th>Cost (VND)</th>
+            </tr>
+            <tr>
+              <td><input type="text" class="scheduled-progress-input" /></td>
+              <td><input type="text" class="actual-progress-input" /></td>
+              <td><input type="text" class="budget-input" /></td>
+              <td><input type="text" class="cost-input" /></td>
+            </tr>
+          </table>
+        </div>
       </div>
       <button id="add-new-task-btn">Add new task</button>
       <button id="submit-btn">SUBMIT</button>
