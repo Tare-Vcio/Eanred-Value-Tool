@@ -1,14 +1,11 @@
-// "use strict";
+"use strict";
 
 //#region 0. Khai báo biến
+//#region Element node
 const addNewTaskButton = document.querySelector("#add-new-task-btn");
 const submitButton = document.querySelector("#submit-btn");
 const taskListElement = document.querySelector("#task-list");
-//#endregion
-
-// 1. LNSK click button Add new task
-addNewTaskButton.onclick = function (event) {
-  const newTaskHTML = `
+const newTaskHTML = `
     <table class="task-item">
         <tr>
         <th>Scheduled progress (%)</th>
@@ -24,10 +21,53 @@ addNewTaskButton.onclick = function (event) {
         </tr>
     </table>
 `;
+//#endregion
 
-  const taskItems = document.querySelectorAll(".task-item");
-  const lastTaskItem = taskItems[taskItems.length - 1];
+//#region Các biến chứa giá trị tính toán
+let PVs = [],
+  ACs = [],
+  EVs = [],
+  PVValue,
+  ACValue,
+  EVValue,
+  CPI,
+  SPI,
+  CPIConclusion,
+  SPIConclusion,
+  costVariance,
+  scheduleVariance,
+  totalBudget,
+  ETC,
+  EAC;
+//#endregion
 
+//#region Element hiển thị kết quả tính toán
+let totalBudgetResultElement = document.querySelector("#total-budget-result");
+let ACResultElement = document.querySelector("#AC-result");
+let EVResultElement = document.querySelector("#EV-result");
+let PVResultElement = document.querySelector("#PV-result");
+let CPIResultElement = document.querySelector("#CPI-result");
+let costVarianceResultElement = document.querySelector("#cost-variance-result");
+let CPIConclusionResultElement = document.querySelector(
+  "#CPI-conclusion-result"
+);
+let SPIResultElement = document.querySelector("#SPI-result");
+let scheduleVarianceResultElement = document.querySelector(
+  "#schedule-variance-result"
+);
+let SPIConclusionResultElement = document.querySelector(
+  "#SPI-conclusion-result"
+);
+let ETCResultElement = document.querySelector("#ETC-result");
+let EACResultElement = document.querySelector("#EAC-result");
+let projectedBudgetOverrunResultElement = document.querySelector(
+  "#projected-budget-overrun-result"
+);
+//#endregion
+//#endregion
+
+// 1. LNSK click button Add new task
+addNewTaskButton.onclick = function (event) {
   taskListElement.innerHTML += newTaskHTML;
 };
 
@@ -57,11 +97,10 @@ submitButton.onclick = function (event) {
   const costValues = Array.from(costNodelist).map((element) => element.value);
   //#endregion
 
+  // Validation ...
+
   //#region Calculate PV, AC, EV
   const taskNumber = scheduledProgressValues.length;
-  let PVs = [],
-    ACs = [],
-    EVs = [];
 
   for (let i = 0; i < taskNumber; i++) {
     let PV =
@@ -74,40 +113,57 @@ submitButton.onclick = function (event) {
     EVs.push(EV);
   }
 
-  let PVValue = PVs.reduce((total, currentValue) => total + currentValue),
-    ACValue = ACs.reduce((total, currentValue) => total + currentValue),
-    EVValue = EVs.reduce((total, currentValue) => total + currentValue);
+  PVValue = PVs.reduce((total, currentValue) => total + currentValue);
+  ACValue = ACs.reduce((total, currentValue) => total + currentValue);
+  EVValue = EVs.reduce((total, currentValue) => total + currentValue);
   //#endregion
 
-  //#region Calculate CPI, SPI, Cost Variances, Schedule Variance
-  let CPI = EVValue / ACValue;
-  let SPI = EVValue / PVValue;
+  //#region Calculate CPI, SPI, CPIConclusion, SPIConclusion, Cost Variances, Schedule Variance
+  CPI = EVValue / ACValue;
+  SPI = EVValue / PVValue;
 
-  let CPIResult =
+  CPIConclusion =
     CPI > 1 ? "Under Budget" : CPI == 1 ? "Exactly on budget" : "Over budget";
-  let SPIResult =
+  SPIConclusion =
     CPI > 1
       ? "Ahead of schedule"
       : CPI == 1
       ? "Exactly on schedule"
       : "Behind schedule";
 
-  let costVariances = (EVValue - ACValue) / EVValue;
-  let scheduleVariance = (EVValue - PVValue) / PVValue;
+  costVariance = (EVValue - ACValue) / EVValue;
+  scheduleVariance = (EVValue - PVValue) / PVValue;
   //#endregion
 
-  //#region Calculate ETC, EAC
-  let totalBudget = budgetValues.reduce(
+  //#region Calculate TotalBudget, ETC, EAC
+  totalBudget = budgetValues.reduce(
     (total, currentValue) => total + currentValue
   );
-  let ETC = (totalBudget - EVValue) / CPI;
-  let EAC = ACValue + ETC;
+  ETC = (totalBudget - EVValue) / CPI;
+  EAC = ACValue + ETC;
   //#endregion
+
+  showCalculationResults();
 };
 
-// --- Phần việc còn lại ---
-
 // 3. Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
+function showCalculationResults() {
+  totalBudgetResultElement.innerHTML += totalBudget;
+  ACResultElement.innerHTML += ACValue;
+  EVResultElement.innerHTML += EVValue;
+  PVResultElement.innerHTML += PVValue;
+  CPIResultElement.innerHTML += CPI;
+  costVarianceResultElement.innerHTML += costVariance;
+  CPIConclusionResultElement.innerHTML += CPIConclusion;
+  SPIResultElement.innerHTML += SPI;
+  scheduleVarianceResultElement.innerHTML += scheduleVariance;
+  SPIConclusionResultElement.innerHTML += SPIConclusion;
+  ETCResultElement.innerHTML += ETC;
+  EACResultElement.innerHTML += EAC;
+  projectedBudgetOverrunResultElement.innerHTML += "";
+}
+
+// --- Phần việc còn lại ---
 
 // 4. Validation (Thuần)
 // + Khi click button SUBMIT => thực hiện validation tất cả thẻ inputs
