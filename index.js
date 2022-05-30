@@ -170,9 +170,9 @@ function showCalculationResults() {
 // + Bắt buộc nhập vào số (kiểu int hoặc float)
 // + Validation ok mới thực code trong hàm submitButton.onclick()
 
-// 5.
+// 5. (Hiếu Huỳnh)
 // CSS lại trang chủ
-// Thêm mô tả và hướng dẫn dùng tool (nếu có) vào file guide.html (Hiếu Huỳnh)
+// Thêm mô tả và hướng dẫn dùng tool (nếu có) vào file guide.html
 
 // 6. Hiển thị label số thự tự task (Tuấn)
 
