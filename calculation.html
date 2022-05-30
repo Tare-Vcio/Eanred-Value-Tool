@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Earned Value Analysis Tool | Calculation</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Earned Value Analysis Tool</h1>
+      <div id="task-list">
+        <table class="task-item">
+          <tr>
+            <th>Scheduled progress (%)</th>
+            <th>Actual progress (%)</th>
+            <th>Budget (VND)</th>
+            <th>Cost (VND)</th>
+          </tr>
+          <tr>
+            <td><input type="text" class="scheduled-progress-input" /></td>
+            <td><input type="text" class="actual-progress-input" /></td>
+            <td><input type="text" class="budget-input" /></td>
+            <td><input type="text" class="cost-input" /></td>
+          </tr>
+        </table>
+      </div>
+      <button id="add-new-task-btn">Add new task</button>
+      <button id="submit-btn">SUBMIT</button>
+      <div class="result">
+        <h2>EVM RESULT</h2>
+        <div class="resultBox">
+          <ul class="col">
+            <h3>Project overview</h3>
+            <li>Total budget:</li>
+            <li>Actual cost (AC):</li>
+            <li>Earned value (EV):</li>
+            <li>Planned value (PV):</li>
+          </ul>
+          <ul class="col">
+            <h3>Cost</h3>
+            <li>Cost performance index (CPI):</li>
+            <li>Cost variance:</li>
+            <h3>Conclusion:</h3>
+          </ul>
+          <ul class="col">
+            <h3>Schedule</h3>
+            <li>Schedule performance index (SPI):</li>
+            <li>Schedule variance:</li>
+            <h3>Conclusion:</h3>
+          </ul>
+          <ul class="col">
+            <h3>Predictions</h3>
+            <li>Estimate to complete (ETC):</li>
+            <li>Estimate at completion (EAC):</li>
+            <li>Projected budget overrun:</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

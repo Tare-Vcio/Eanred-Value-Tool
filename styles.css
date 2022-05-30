@@ -1,64 +1,109 @@
 body {
-    background-image: linear-gradient(to right top, #0e60da, #0092f9, #00b5d1, #00ce7c, #9bda10);
-    background-size:cover;
-    background-repeat: no-repeat;
-    height: 100vh;
+  background-image: linear-gradient(
+    to right top,
+    #0e60da,
+    #0092f9,
+    #00b5d1,
+    #00ce7c,
+    #9bda10
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 main {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 table {
-    border: 1px solid #333;
-    margin: 0 auto;
+  border: 1px solid #333;
+  margin: 0 auto;
 }
 
-th, td {
-    border: 1px solid #333;
-    font-size: 20px;
-    color:#0D4394;
-    font-weight: bolder;
+th,
+td {
+  border: 1px solid #333;
+  font-size: 20px;
+  color: #0d4394;
+  font-weight: bolder;
 }
 
 th {
-    padding: 10px;
+  padding: 10px;
 }
 
 input {
-    border: none;
-    padding: 10px;
-    border-radius: 2px;
+  border: none;
+  padding: 10px;
+  border-radius: 2px;
 }
 
 ul {
-    padding: 0;
-    width: 25%;
-
+  padding: 0;
+  width: 25%;
 }
 
 main h1 {
-    font-size: 40px;
-    text-align: center;
-    color: #0D4394;
-    margin-bottom: 45px;
+  font-size: 40px;
+  text-align: center;
+  color: #0d4394;
+  margin-bottom: 45px;
 }
 
 .result {
-    margin-left: 13%;
+  margin-left: 13%;
 }
 
 .result h2 {
-    font-size: 30px;
-    margin-bottom: 0px;
+  font-size: 30px;
+  margin-bottom: 0px;
 }
 
 .resultBox {
-    display: flex;
-    justify-content: center;
-    margin: 0 1.3%;
+  display: flex;
+  justify-content: center;
+  margin: 0 1.3%;
 }
 
 .resultBox .col h3 {
-    margin-left: -17px;
+  margin-left: -17px;
+}
+
+/* CALCULATION.HTML */
+#task-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.task-item {
+}
+
+.scheduled-progress-input {
+}
+
+.actual-progress-input {
+}
+
+.budget-input {
+}
+
+.cost-input {
+}
+
+#add-new-task-btn,
+#submit-btn {
+  float: right;
+  width: 130px;
+  height: 50px;
+  background: yellow;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#submit-btn {
+  background: red;
 }
