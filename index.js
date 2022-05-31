@@ -188,5 +188,3 @@ function showCalculationResults() {
 // 5. (Hiếu Huỳnh)
 // CSS lại trang chủ
 // Thêm mô tả và hướng dẫn dùng tool (nếu có) vào file guide.html
-
-// 6. Deploy website ? (Tuấn ?)
