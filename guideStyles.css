@@ -1,0 +1,49 @@
+body {
+    background-image: linear-gradient(to right top,
+            #0e60da,
+            #0092f9,
+            #00b5d1,
+            #00ce7c,
+            #9bda10);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+main h1 {
+    font-size: 40px;
+    text-align: center;
+    color: #0d4394;
+    margin-bottom: 40px;
+}
+
+h3{
+    color: white;
+    font-size: x-large;
+}
+
+li{
+    display: flex;
+}
+
+p{
+    font-size: large;
+}
+
+.nameField{
+    font-weight: 550;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.notice{
+    width: 75px;
+    height: 30px;
+    text-align: center;
+    background-color: #ce2c26;
+}
+
+.link{
+    float: right;
+    margin-right: 5%;
+}
