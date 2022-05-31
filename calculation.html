@@ -32,34 +32,71 @@
       </div>
       <button id="add-new-task-btn">Add new task</button>
       <button id="submit-btn">SUBMIT</button>
-      <div class="result">
+      <div id="result">
         <h2>EVM RESULT</h2>
         <div class="resultBox">
           <ul class="col">
             <h3>Project overview</h3>
-            <li id="total-budget-result">Total budget:</li>
-            <li id="AC-result">Actual cost (AC):</li>
-            <li id="EV-result">Earned value (EV):</li>
-            <li id="PV-result">Planned value (PV):</li>
+            <li>
+              Total budget:
+              <span id="total-budget-result"></span>
+            </li>
+            <li>
+              Actual cost (AC):
+              <span id="AC-result"></span>
+            </li>
+            <li>
+              Earned value (EV):
+              <span id="EV-result"></span>
+            </li>
+            <li>
+              Planned value (PV):
+              <span id="PV-result"></span>
+            </li>
           </ul>
           <ul class="col">
             <h3>Cost</h3>
-            <li id="CPI-result">Cost performance index (CPI):</li>
-            <li id="cost-variance-result">Cost variance:</li>
-            <h3 id="CPI-conclusion-result">Conclusion:</h3>
+            <li>
+              Cost performance index (CPI):
+              <span id="CPI-result"></span>
+            </li>
+            <li>
+              Cost variance:
+              <span id="cost-variance-result"></span>
+            </li>
+            <h3>
+              Conclusion:
+              <span id="CPI-conclusion-result"></span>
+            </h3>
           </ul>
           <ul class="col">
             <h3>Schedule</h3>
-            <li id="SPI-result">Schedule performance index (SPI):</li>
-            <li id="schedule-variance-result">Schedule variance:</li>
-            <h3 id="SPI-conclusion-result">Conclusion:</h3>
+            <li>
+              Schedule performance index (SPI):
+              <span id="SPI-result"></span>
+            </li>
+            <li>
+              Schedule variance:
+              <span id="schedule-variance-result"></span>
+            </li>
+            <h3>
+              Conclusion:
+              <span id="SPI-conclusion-result"></span>
+            </h3>
           </ul>
           <ul class="col">
             <h3>Predictions</h3>
-            <li id="ETC-result">Estimate to complete (ETC):</li>
-            <li id="EAC-result">Estimate at completion (EAC):</li>
-            <li id="projected-budget-overrun-result">
+            <li>
+              Estimate to complete (ETC):
+              <span id="ETC-result"></span>
+            </li>
+            <li>
+              Estimate at completion (EAC):
+              <span id="EAC-result"></span>
+            </li>
+            <li>
               Projected budget overrun:
+              <span id="projected-budget-overrun-result"></span>
             </li>
           </ul>
         </div>

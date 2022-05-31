@@ -51,11 +51,11 @@ main h1 {
   margin-bottom: 45px;
 }
 
-.result {
+#result {
   margin-left: 13%;
 }
 
-.result h2 {
+#result h2 {
   font-size: 30px;
   margin-bottom: 0px;
 }

@@ -26,6 +26,14 @@ let PVs = [],
   projectedBudgetOverrun;
 //#endregion
 
+//#region 4 element nodelist, 4 values array
+let scheduledProgressNodelist,
+  actualProgressNodelist,
+  budgetNodelist,
+  costNodelist;
+let scheduledProgressValues, actualProgressValues, budgetValues, costValues;
+//#endregion
+
 //#region Element hiển thị kết quả tính toán
 let totalBudgetResultElement = document.querySelector("#total-budget-result");
 let ACResultElement = document.querySelector("#AC-result");
@@ -49,9 +57,47 @@ let projectedBudgetOverrunResultElement = document.querySelector(
   "#projected-budget-overrun-result"
 );
 //#endregion
+
+//#region Hàm resetValueOfAllVariable(), showCalculationResults()
+function resetValueOfAllVariable() {
+  totalBudget = 0;
+  ACValue = 0;
+  EVValue = 0;
+  PVValue = 0;
+  CPI = 0;
+  costVariance = 0;
+  CPIConclusion = "";
+  SPI = 0;
+  scheduleVariance = 0;
+  SPIConclusion = "";
+  ETC = 0;
+  EAC = 0;
+  projectedBudgetOverrun = 0;
+}
+
+function showCalculationResults() {
+  totalBudgetResultElement.innerHTML = ` $${totalBudget}`;
+  ACResultElement.innerHTML = ` $${ACValue}`;
+  EVResultElement.innerHTML = ` $${EVValue}`;
+  PVResultElement.innerHTML = ` $${PVValue}`;
+  CPIResultElement.innerHTML = ` ${CPI}`;
+  costVarianceResultElement.innerHTML = ` ${costVariance}%`;
+  CPIConclusionResultElement.innerHTML = ` ${CPIConclusion}`;
+  SPIResultElement.innerHTML = ` ${SPI}`;
+  scheduleVarianceResultElement.innerHTML = ` ${scheduleVariance}%`;
+  SPIConclusionResultElement.innerHTML = ` ${SPIConclusion}`;
+  ETCResultElement.innerHTML = ` $${ETC}`;
+  EACResultElement.innerHTML = ` $${EAC}`;
+  projectedBudgetOverrunResultElement.innerHTML = ` $${projectedBudgetOverrun} over budget`;
+}
+//#endregion
 //#endregion
 
-//#region 1. LNSK click button Add new task
+//#region 1. Xóa trường lưu số thứ tự task hiện tại trong localStorage
+localStorage.removeItem("currentTaskNumber");
+//#endregion
+
+//#region 2. LNSK click button "Add new task"
 addNewTaskButton.onclick = function (event) {
   let currentTaskNumberLS = localStorage.getItem("currentTaskNumber");
   let currentTaskNumber = currentTaskNumberLS ? Number(currentTaskNumberLS) : 1;
@@ -81,58 +127,66 @@ addNewTaskButton.onclick = function (event) {
 };
 //#endregion
 
-//#region 2. LNSK click button SUBMIT
+//#region 3. LNSK click button "SUBMIT"
 submitButton.onclick = function (event) {
+  // Reset giá trị cho tất cả các biến tính toán về bằng 0, bằng ""
+  resetValueOfAllVariable();
+
   //#region 4 element nodelist
-  const scheduledProgressNodelist = document.querySelectorAll(
+  scheduledProgressNodelist = document.querySelectorAll(
     ".scheduled-progress-input"
   );
-  const actualProgressNodelist = document.querySelectorAll(
-    ".actual-progress-input"
-  );
-  const budgetNodelist = document.querySelectorAll(".budget-input");
-  const costNodelist = document.querySelectorAll(".cost-input");
+  actualProgressNodelist = document.querySelectorAll(".actual-progress-input");
+  budgetNodelist = document.querySelectorAll(".budget-input");
+  costNodelist = document.querySelectorAll(".cost-input");
   //#endregion
 
   //#region 4 values array
-  const scheduledProgressValues = Array.from(scheduledProgressNodelist).map(
+  scheduledProgressValues = Array.from(scheduledProgressNodelist).map(
     (element) => Number(element.value)
   );
-  const actualProgressValues = Array.from(actualProgressNodelist).map(
-    (element) => Number(element.value)
-  );
-  const budgetValues = Array.from(budgetNodelist).map((element) =>
+  actualProgressValues = Array.from(actualProgressNodelist).map((element) =>
     Number(element.value)
   );
-  const costValues = Array.from(costNodelist).map((element) =>
+  budgetValues = Array.from(budgetNodelist).map((element) =>
     Number(element.value)
   );
+  costValues = Array.from(costNodelist).map((element) => Number(element.value));
   //#endregion
 
   // Validation ...
 
-  //#region Calculate PV, AC, EV
+  //#region Tính PV, AC, EV
   const taskNumber = scheduledProgressValues.length;
 
   for (let i = 0; i < taskNumber; i++) {
-    let PV =
-      parseFloat(scheduledProgressValues[i]) * parseFloat(budgetValues[i]);
+    let PV = parseFloat(
+      (scheduledProgressValues[i] * parseFloat(budgetValues[i])) / 100
+    );
     let AC = parseFloat(costValues[i]);
-    let EV = parseFloat(actualProgressValues[i]) * parseFloat(budgetValues[i]);
+    let EV = parseFloat(
+      (actualProgressValues[i] * parseFloat(budgetValues[i])) / 100
+    );
 
     PVs.push(PV);
     ACs.push(AC);
     EVs.push(EV);
   }
 
-  PVValue = PVs.reduce((total, currentValue) => total + currentValue);
-  ACValue = ACs.reduce((total, currentValue) => total + currentValue);
-  EVValue = EVs.reduce((total, currentValue) => total + currentValue);
+  PVValue = Number(
+    PVs.reduce((total, currentValue) => total + currentValue).toFixed(0)
+  );
+  ACValue = Number(
+    ACs.reduce((total, currentValue) => total + currentValue).toFixed(0)
+  );
+  EVValue = Number(
+    EVs.reduce((total, currentValue) => total + currentValue).toFixed(0)
+  );
   //#endregion
 
-  //#region Calculate CPI, SPI, CPIConclusion, SPIConclusion, Cost Variances, Schedule Variance
-  CPI = EVValue / ACValue;
-  SPI = EVValue / PVValue;
+  //#region Tính CPI, SPI, CPIConclusion, SPIConclusion, Cost Variances, Schedule Variance
+  CPI = Number((EVValue / ACValue).toFixed(3));
+  SPI = Number((EVValue / PVValue).toFixed(3));
 
   CPIConclusion =
     CPI > 1 ? "Under Budget" : CPI == 1 ? "Exactly on budget" : "Over budget";
@@ -143,39 +197,24 @@ submitButton.onclick = function (event) {
       ? "Exactly on schedule"
       : "Behind schedule";
 
-  costVariance = (EVValue - ACValue) / EVValue;
-  scheduleVariance = (EVValue - PVValue) / PVValue;
+  costVariance = Number((((EVValue - ACValue) * 100) / EVValue).toFixed(2));
+  scheduleVariance = Number((((EVValue - PVValue) * 100) / PVValue).toFixed(2));
   //#endregion
 
-  //#region Calculate TotalBudget, ETC, EAC, ProjectedBudgetOverrun
-  totalBudget = budgetValues.reduce(
-    (total, currentValue) => total + currentValue
+  //#region Tính TotalBudget, ETC, EAC, ProjectedBudgetOverrun
+  totalBudget = Number(
+    budgetValues
+      .reduce((total, currentValue) => total + currentValue)
+      .toFixed(0)
   );
-  ETC = (totalBudget - EVValue) / CPI;
-  EAC = ACValue + ETC;
-  projectedBudgetOverrun = EAC - totalBudget;
+  ETC = Number(((totalBudget - EVValue) / CPI).toFixed(0));
+  EAC = Number((ACValue + ETC).toFixed(0));
+  projectedBudgetOverrun = Number((EAC - totalBudget).toFixed(0));
   //#endregion
 
+  // Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
   showCalculationResults();
 };
-//#endregion
-
-//#region 3. Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
-function showCalculationResults() {
-  totalBudgetResultElement.innerHTML += ` $${totalBudget}`;
-  ACResultElement.innerHTML += ` $${ACValue}`;
-  EVResultElement.innerHTML += ` $${EVValue}`;
-  PVResultElement.innerHTML += ` $${PVValue}`;
-  CPIResultElement.innerHTML += ` ${CPI}`;
-  costVarianceResultElement.innerHTML += ` ${costVariance}%`;
-  CPIConclusionResultElement.innerHTML += ` ${CPIConclusion}`;
-  SPIResultElement.innerHTML += ` ${SPI}`;
-  scheduleVarianceResultElement.innerHTML += ` ${scheduleVariance}%`;
-  SPIConclusionResultElement.innerHTML += ` ${SPIConclusion}`;
-  ETCResultElement.innerHTML += ` $${ETC}`;
-  EACResultElement.innerHTML += ` $${ETC}`;
-  projectedBudgetOverrunResultElement.innerHTML += ` $${projectedBudgetOverrun} over budget`;
-}
 //#endregion
 
 // --- Phần việc còn lại ---
