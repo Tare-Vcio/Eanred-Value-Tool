@@ -22,7 +22,8 @@ let PVs = [],
   scheduleVariance,
   totalBudget,
   ETC,
-  EAC;
+  EAC,
+  projectedBudgetOverrun;
 //#endregion
 
 //#region Element hiển thị kết quả tính toán
@@ -50,36 +51,37 @@ let projectedBudgetOverrunResultElement = document.querySelector(
 //#endregion
 //#endregion
 
-// 1. LNSK click button Add new task
+//#region 1. LNSK click button Add new task
 addNewTaskButton.onclick = function (event) {
   let currentTaskNumberLS = localStorage.getItem("currentTaskNumber");
   let currentTaskNumber = currentTaskNumberLS ? Number(currentTaskNumberLS) : 1;
 
   const newTaskHTML = `
     <div class="task-item">
-    <h2 class="task-item__label">Task ${++currentTaskNumber}</h2>
-    <table class="task-item__table">
-    <tr>
-    <th>Scheduled progress (%)</th>
-    <th>Actual progress (%)</th>
-    <th>Budget (VND)</th>
-    <th>Cost (VND)</th>
-    </tr>
-    <tr>
-    <td><input type="text" class="scheduled-progress-input" /></td>
-    <td><input type="text" class="actual-progress-input" /></td>
-    <td><input type="text" class="budget-input" /></td>
-    <td><input type="text" class="cost-input" /></td>
-    </tr>
-    </table>
+      <h2 class="task-item__label">Task ${++currentTaskNumber}</h2>
+      <table class="task-item__table">
+        <tr>
+          <th>Scheduled progress (%)</th>
+          <th>Actual progress (%)</th>
+          <th>Budget ($)</th>
+          <th>Cost ($)</th>
+        </tr>
+        <tr>
+          <td><input type="text" class="scheduled-progress-input" /></td>
+          <td><input type="text" class="actual-progress-input" /></td>
+          <td><input type="text" class="budget-input" /></td>
+          <td><input type="text" class="cost-input" /></td>
+        </tr>
+      </table>
     </div>
   `;
   taskListElement.innerHTML += newTaskHTML;
 
   localStorage.setItem("currentTaskNumber", currentTaskNumber);
 };
+//#endregion
 
-// 2. LNSK click button SUBMIT
+//#region 2. LNSK click button SUBMIT
 submitButton.onclick = function (event) {
   //#region 4 element nodelist
   const scheduledProgressNodelist = document.querySelectorAll(
@@ -94,15 +96,17 @@ submitButton.onclick = function (event) {
 
   //#region 4 values array
   const scheduledProgressValues = Array.from(scheduledProgressNodelist).map(
-    (element) => element.value
+    (element) => Number(element.value)
   );
   const actualProgressValues = Array.from(actualProgressNodelist).map(
-    (element) => element.value
+    (element) => Number(element.value)
   );
-  const budgetValues = Array.from(budgetNodelist).map(
-    (element) => element.value
+  const budgetValues = Array.from(budgetNodelist).map((element) =>
+    Number(element.value)
   );
-  const costValues = Array.from(costNodelist).map((element) => element.value);
+  const costValues = Array.from(costNodelist).map((element) =>
+    Number(element.value)
+  );
   //#endregion
 
   // Validation ...
@@ -143,33 +147,36 @@ submitButton.onclick = function (event) {
   scheduleVariance = (EVValue - PVValue) / PVValue;
   //#endregion
 
-  //#region Calculate TotalBudget, ETC, EAC
+  //#region Calculate TotalBudget, ETC, EAC, ProjectedBudgetOverrun
   totalBudget = budgetValues.reduce(
     (total, currentValue) => total + currentValue
   );
   ETC = (totalBudget - EVValue) / CPI;
   EAC = ACValue + ETC;
+  projectedBudgetOverrun = EAC - totalBudget;
   //#endregion
 
   showCalculationResults();
 };
+//#endregion
 
-// 3. Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
+//#region 3. Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
 function showCalculationResults() {
-  totalBudgetResultElement.innerHTML += totalBudget;
-  ACResultElement.innerHTML += ACValue;
-  EVResultElement.innerHTML += EVValue;
-  PVResultElement.innerHTML += PVValue;
-  CPIResultElement.innerHTML += CPI;
-  costVarianceResultElement.innerHTML += costVariance;
-  CPIConclusionResultElement.innerHTML += CPIConclusion;
-  SPIResultElement.innerHTML += SPI;
-  scheduleVarianceResultElement.innerHTML += scheduleVariance;
-  SPIConclusionResultElement.innerHTML += SPIConclusion;
-  ETCResultElement.innerHTML += ETC;
-  EACResultElement.innerHTML += EAC;
-  projectedBudgetOverrunResultElement.innerHTML += "";
+  totalBudgetResultElement.innerHTML += ` $${totalBudget}`;
+  ACResultElement.innerHTML += ` $${ACValue}`;
+  EVResultElement.innerHTML += ` $${EVValue}`;
+  PVResultElement.innerHTML += ` $${PVValue}`;
+  CPIResultElement.innerHTML += ` ${CPI}`;
+  costVarianceResultElement.innerHTML += ` ${costVariance}%`;
+  CPIConclusionResultElement.innerHTML += ` ${CPIConclusion}`;
+  SPIResultElement.innerHTML += ` ${SPI}`;
+  scheduleVarianceResultElement.innerHTML += ` ${scheduleVariance}%`;
+  SPIConclusionResultElement.innerHTML += ` ${SPIConclusion}`;
+  ETCResultElement.innerHTML += ` $${ETC}`;
+  EACResultElement.innerHTML += ` $${ETC}`;
+  projectedBudgetOverrunResultElement.innerHTML += ` $${projectedBudgetOverrun} over budget`;
 }
+//#endregion
 
 // --- Phần việc còn lại ---
 
