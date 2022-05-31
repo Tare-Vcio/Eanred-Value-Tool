@@ -22,10 +22,34 @@
               <th>Cost ($)</th>
             </tr>
             <tr>
-              <td><input type="text" class="scheduled-progress-input" /></td>
-              <td><input type="text" class="actual-progress-input" /></td>
-              <td><input type="text" class="budget-input" /></td>
-              <td><input type="text" class="cost-input" /></td>
+              <td>
+                <input
+                  type="text"
+                  class="scheduled-progress-input"
+                  onkeypress="handleNumber(event)"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="actual-progress-input"
+                  onkeypress="handleNumber(event)"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="budget-input"
+                  onkeypress="handleNumber(event)"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="cost-input"
+                  onkeypress="handleNumber(event)"
+                />
+              </td>
             </tr>
           </table>
         </div>
