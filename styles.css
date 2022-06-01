@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
   background-image: linear-gradient(
     to right top,
@@ -16,6 +18,8 @@ main {
   margin-top: 100px;
 }
 
+
+
 table {
   border: 1px solid #333;
   margin: 0 auto;
@@ -30,39 +34,52 @@ td {
 }
 
 th {
-  padding: 10px;
+  padding: 10px 30px;
 }
 
 input {
   border: none;
   padding: 10px;
+  width: 90%;
   border-radius: 2px;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
 }
 
 ul {
   padding: 0;
-  width: 25%;
+  width: 22%;
 }
 
 main h1 {
   font-size: 40px;
   text-align: center;
   color: #0d4394;
-  margin-bottom: 45px;
+  margin-bottom: 15px;
+}
+
+h5 {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 15% 1.5% 0px;
+  color: #0d4394;
 }
 
 #result {
-  margin-left: 13%;
+  margin-left: 1%;
 }
 
 #result h2 {
   font-size: 30px;
   margin-bottom: 0px;
+  margin-top: 70px;
 }
 
 .resultBox {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0 1.3%;
 }
 
@@ -73,9 +90,10 @@ main h1 {
 /* CALCULATION.HTML */
 #task-list {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   flex-direction: column;
+  margin-left: 1%;
 }
 
 .task-item {
@@ -91,14 +109,77 @@ main h1 {
 #add-new-task-btn,
 #submit-btn {
   float: right;
-  width: 130px;
+  width: 196px;
   height: 50px;
-  background: yellow;
-  border-radius: 5px;
+  background: #00ce7c;
+  border-radius: 30px;
   font-weight: bold;
   font-size: 16px;
+  margin-top: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+  opacity: 1;
 }
 
 #submit-btn {
-  background: red;
+  background: #4ccee8;
+  margin-right: 291px;
+  transition: 0.5s;
+  cursor: pointer;
+  opacity: 1;
+}
+
+#submit-btn:hover {
+  opacity: 0.5;
+  color: #fff;
+}
+
+#add-new-task-btn:hover {
+  opacity: 0.5;
+  color: #fff;
+}
+
+.boxCommon{
+  display: flex;
+  justify-content: space-around;
+}
+
+.calculator {
+  width: 70%;
+}
+
+.constraint {
+  width: 30%;
+}
+
+.constraint ul {
+  width: 100%;
+}
+
+.constraint ul li {
+ list-style: none;
+}
+
+.notice {
+  background-color: #ce2c26;
+  padding: 5px;
+  color: white;
+  font-size: 20px;
+  width: 58px;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+#notice li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#notice li p {
+  margin-right: 10px;
+}
+
+#result h2 {
+  color: #0d4394;
 }
