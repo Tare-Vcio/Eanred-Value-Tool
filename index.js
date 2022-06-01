@@ -74,9 +74,9 @@ submitButton.onclick = () => {
           ? "Exactly on budget"
           : "Over budget";
       SPIConclusion =
-        CPI > 1
+        SPI > 1
           ? "Ahead of schedule"
-          : CPI == 1
+          : SPI == 1
           ? "Exactly on schedule"
           : "Behind schedule";
       costVariance = Number((((EVValue - ACValue) * 100) / EVValue).toFixed(2));
