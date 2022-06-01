@@ -127,6 +127,7 @@ addNewTaskButton.onclick = function (event) {
 };
 //#endregion
 
+//#region 3. Các hàm validate
 function handleNumber(event) {
   const char = String.fromCharCode(event.which);
   if (!/[0-9]/.test(char) && char != ".") {
@@ -142,8 +143,9 @@ function handleInvalidFiled(array) {
   }
   return true;
 }
+//#endregion
 
-//#region 3. LNSK click button "SUBMIT"
+//#region 4. LNSK click button "SUBMIT"
 submitButton.onclick = function (event) {
   // Reset giá trị cho tất cả các biến tính toán về bằng 0, bằng ""
   resetValueOfAllVariable();
@@ -170,8 +172,6 @@ submitButton.onclick = function (event) {
   costValues = Array.from(costNodelist).map((element) => Number(element.value));
   //#endregion
 
-  //#region Tính PV, AC, EV
-  const taskNumber = scheduledProgressValues.length;
   // Validation ...
   if (
     handleInvalidFiled(scheduledProgressValues) &&
@@ -179,6 +179,9 @@ submitButton.onclick = function (event) {
     handleInvalidFiled(budgetValues) &&
     handleInvalidFiled(costValues)
   ) {
+    //#region Tính PV, AC, EV
+    const taskNumber = scheduledProgressValues.length;
+
     for (let i = 0; i < taskNumber; i++) {
       let PV = parseFloat(
         (scheduledProgressValues[i] * parseFloat(budgetValues[i])) / 100
@@ -237,18 +240,7 @@ submitButton.onclick = function (event) {
     // Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
     showCalculationResults();
   } else {
-    alert("Please enter all filed");
+    alert("Please enter correct in all filed !!");
   }
 };
 //#endregion
-
-// --- Phần việc còn lại ---
-
-// 4. Validation (Thuần)
-// + Khi click button SUBMIT => thực hiện validation tất cả thẻ inputs
-// + Bắt buộc nhập vào số (kiểu int hoặc float)
-// + Validation ok mới thực code trong hàm submitButton.onclick()
-
-// 5. (Hiếu Huỳnh)
-// CSS lại trang chủ
-// Thêm mô tả và hướng dẫn dùng tool (nếu có) vào file guide.html
