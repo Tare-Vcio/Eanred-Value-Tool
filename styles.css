@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
-  background-image: url("/assets/image/background.webp") ;
+  background-image: url("/assets/image/background.webp");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -9,8 +9,6 @@ body {
 main {
   margin-top: 0;
 }
-
-
 
 table {
   border: 1px solid #333;
@@ -39,7 +37,7 @@ input {
 }
 
 p {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 ul {
@@ -57,9 +55,9 @@ main h1 {
 
 h5 {
   text-align: center;
-    font-size: 40px;
-    color: #0d4394;
-    margin: 20px;
+  font-size: 40px;
+  color: #0d4394;
+  margin: 20px;
 }
 
 #result {
@@ -81,12 +79,13 @@ h5 {
 
 .resultBox .col h3 {
   margin-left: 0px;
-    font-size: 28px;
-    margin-top: 0px;
-    margin-bottom: 5px;
+  font-size: 28px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 
-.resultBox ul:nth-child(3), .resultBox ul:nth-child(4) {
+.resultBox ul:nth-child(3),
+.resultBox ul:nth-child(4) {
   margin-top: 15px;
 }
 
@@ -110,17 +109,21 @@ h5 {
   justify-content: center;
 }
 
+.task-item__table__default {
+  margin-right: 45px;
+}
+
 .task-item__label {
   margin-right: 50px;
   margin: 0 15px;
 }
 
+#submit-btn,
 #add-new-task-btn,
-#submit-btn {
+#clear-all-btn {
   float: right;
   width: 196px;
   height: 50px;
-  background: #00ce7c;
   border-radius: 30px;
   font-weight: bold;
   font-size: 16px;
@@ -130,25 +133,31 @@ h5 {
   opacity: 1;
 }
 
-#submit-btn {
+#clear-all-btn {
+  background-color: red;
+  margin-right: 10px;
+}
+
+#add-new-task-btn {
   background: #4ccee8;
+  margin-right: 10px;
+}
+
+#submit-btn {
+  background: #00ce7c;
   margin-right: 20px;
   transition: 0.5s;
   cursor: pointer;
   opacity: 1;
 }
 
+#clear-all-btn:hover,
+#add-new-task-btn:hover,
 #submit-btn:hover {
-  opacity: 0.5;
-  color: #fff;
+  opacity: 0.6;
 }
 
-#add-new-task-btn:hover {
-  opacity: 0.5;
-  color: #fff;
-}
-
-.boxCommon{
+.boxCommon {
   display: flex;
   justify-content: space-around;
 }
@@ -169,10 +178,9 @@ h5 {
 }
 
 .constraint ul li {
- list-style: none;
- font-size: 20px;
- margin: 5px 0;
- 
+  list-style: none;
+  font-size: 20px;
+  margin: 5px 0;
 }
 
 .notice {
@@ -200,9 +208,9 @@ h5 {
 }
 
 .contact__img {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .contact__img p {
@@ -238,7 +246,7 @@ footer {
   background-size: cover;
 }
 
-.btnDelete {
+.delete-task-btn {
   text-align: center;
   padding: 4px 8px;
   margin: 0 0 5px 5px;
@@ -249,7 +257,7 @@ footer {
   opacity: 1;
 }
 
-.btnDelete:hover {
+.delete-task-btn:hover {
   opacity: 0.6;
   background-color: red;
   color: white;
