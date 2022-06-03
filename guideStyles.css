@@ -4,15 +4,7 @@ html {
     scroll-behavior: smooth;
   }
 body {
-    background-image: linear-gradient(to right top,
-            #0e60da,
-            #0092f9,
-            #00b5d1,
-            #00ce7c,
-            #9bda10);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
+    background: white
 }
 
 main h1 {
@@ -97,6 +89,7 @@ span, p {
     font-size: 23px;
     font-weight: bold;
     color: black;
+    margin-left: -20px;
 }
 
 .formula {

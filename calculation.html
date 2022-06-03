@@ -8,17 +8,15 @@
   <title>Earned Value Analysis Tool | Calculation</title>
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link
-  rel="stylesheet"
-  href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
-/>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 
 <body>
   <main>
+    <p class="guideToUse"><a href="./guide.html">How to calculate on Earned Value Analysis Tool (EVAT)?</a></p>
     <h1>Earned Value Analysis Tool</h1>
     <section class="boxCommon">
-      
+
       <section class="calculator">
         <h5>Calculator</h5>
         <div id="task-list">
@@ -45,15 +43,59 @@
                   <input type="text" class="cost-input" onkeypress="handleNumber(event)" />
                 </td>
               </tr>
+
             </table>
+            <a class="btnDelete" href="#">X</a>
           </div>
         </div>
         <div class="buttonHandle">
           <button id="submit-btn">Submit</button>
           <button id="add-new-task-btn">Add new task</button>
         </div>
+        <div class="guide">
+          <h5>Guide</h5>
+          <ul>
+            <h2>There are 4 fields you need to fill and all the button:</h2>
+            <li>
+              <p class="nameField"><b>Scheduled Progress:</b> The percentage of current task in all task(s) that you
+                estimate (Must less than or equal to 100)</p>
+            </li>
+
+            <li>
+              <p class="nameField"><b>Actual progress:</b> The real percentage of the current task (Must less than or
+                equal to Scheduled Progress)</p>
+            </li>
+
+            <li>
+              <p class="nameField"><b>Budget:</b> The cost that you estimate for the current task</p>
+            </li>
+
+            <li>
+              <p class="nameField"><b>Cost:</b> The actual cost that you spend for the task</p>
+            </li>
+
+            <li>
+              <p class="nameField"><b>Add new task:</b> To add new field for another task</p>
+            </li>
+
+            <li>
+              <p class="nameField"><b>Submit:</b> To calculate the earned value</p>
+            </li>
+
+          </ul>
+        </div>
+        <ul id="notice">
+          <h3 class="notice">Notice</h3>
+
+          <li>
+            <p>Total task percentage of <b>Scheduled Progress</b> must equal 100%</p>
+          </li>
+        </ul>
+
+      </section>
+      <div class="constraint">
         <div id="result">
-          <h2>EVM RESULT</h2>
+          <h2>EVAT report</h2>
           <div class="resultBox">
             <ul class="col">
               <h3>Project overview</h3>
@@ -84,10 +126,10 @@
                 Cost variance:
                 <span id="cost-variance-result"></span>
               </li>
-              <h3>
+              <h4>
                 Conclusion:
                 <span id="CPI-conclusion-result"></span>
-              </h3>
+              </h4>
             </ul>
             <ul class="col">
               <h3>Schedule</h3>
@@ -99,10 +141,10 @@
                 Schedule variance:
                 <span id="schedule-variance-result"></span>
               </li>
-              <h3>
+              <h4>
                 Conclusion:
                 <span id="SPI-conclusion-result"></span>
-              </h3>
+              </h4>
             </ul>
             <ul class="col">
               <h3>Predictions</h3>
@@ -120,48 +162,39 @@
               </li>
             </ul>
           </div>
+
         </div>
-      </section>
-      <div class="constraint">
-        <h5>Guide</h5>
-        <ul>
-          <h2>There are 4 fields you need to fill and all the button:</h2>
-          <li>
-            <p class="nameField"><b>Scheduled Progress:</b> The percentage of current task in all task(s) that you estimate (Must less than or equal to 100)</p>
-          </li>
-  
-          <li>
-            <p class="nameField"><b>Actual progress:</b> The real percentage of the current task (Must less than or equal to Scheduled Progress)</p>
-          </li>
-  
-          <li>
-            <p class="nameField"><b>Budget:</b> The cost that you estimate for the current task</p>
-          </li>
-  
-          <li>
-            <p class="nameField"><b>Cost:</b> The actual cost that you spend for the task</p>
-          </li>
-  
-          <li>
-            <p class="nameField"><b>Add new task:</b> To add new field for another task</p>
-          </li>
-  
-          <li>
-            <p class="nameField"><b>Submit:</b> To calculate the earned value</p>
-          </li>
-  
-        </ul>
-        <ul id="notice">
-          <h3 class="notice">Notice</h3>
-  
-          <li>
-            <p>Total task percentage of <b>Scheduled Progress</b> must equal 100%</p>
-          </li>
-        </ul>
+      </div>
+    </section>
+    <section class="contact">
+      <h5>Contact</h5>
+      <div class="contact__img">
+        <div>
+          <img src="./assets/image/tuan.jpg" alt="">
+          <p>Huỳnh Đức Thanh Tuấn</p>
+        </div>
+        <div>
+          <img src="./assets/image/thuan.jpg" alt="">
+          <p>Lê Văn Thuần</p>
+        </div>
+        <div>
+          <img src="./assets/image/hieuhuynh.jpg" alt="">
+          <p>Huỳnh Ngọc Hiếu</p>
+        </div>
+        <div>
+          <img src="./assets/image/lich.jpg" alt="">
+          <p>Nguyễn Hồng Lịch</p>
+        </div>
+        <div>
+          <img src="./assets/image/hieu.jpg" alt="">
+          <p>Võ Trung Hiếu</p>
+        </div>
       </div>
     </section>
   </main>
+  <footer>
 
+  </footer>
   <script src="./index.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
