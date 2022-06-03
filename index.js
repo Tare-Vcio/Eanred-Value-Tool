@@ -254,10 +254,3 @@ function handlePercentFiled(array) {
   return true;
 }
 // config toastr
-toastr.options = {
-  progressBar: true,
-  timeOut: "1000",
-  hideMethod: "fadeOut",
-  extendedTimeOut: "1000",
-  positionClass: "toast-top-center",
-};
