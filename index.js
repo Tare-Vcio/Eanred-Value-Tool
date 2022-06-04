@@ -58,9 +58,12 @@ let projectedBudgetOverrunResultElement = document.querySelector(
 );
 //#endregion
 
-//#region Hàm resetValueOfAllVariable, showCalculationResults, saveCalculationResultsIntoLS, clearAllInputValue
+//#region Hàm resetValueOfAllVariable, showCalculationResults, resetCalculationResults, saveCalculationResultsIntoLS, clearAllInputValue
 function resetValueOfAllVariable() {
   totalBudget = 0;
+  PVs = [];
+  ACs = [];
+  EVs = [];
   ACValue = 0;
   EVValue = 0;
   PVValue = 0;
@@ -89,6 +92,22 @@ function showCalculationResults() {
   ETCResultElement.innerHTML = `$${ETC}`;
   EACResultElement.innerHTML = `$${EAC}`;
   projectedBudgetOverrunResultElement.innerHTML = `$${projectedBudgetOverrun} over budget`;
+}
+
+function resetCalculationResults() {
+  totalBudgetResultElement.innerHTML = "";
+  ACResultElement.innerHTML = "";
+  EVResultElement.innerHTML = "";
+  PVResultElement.innerHTML = "";
+  CPIResultElement.innerHTML = "";
+  costVarianceResultElement.innerHTML = "";
+  CPIConclusionResultElement.innerHTML = "";
+  SPIResultElement.innerHTML = "";
+  scheduleVarianceResultElement.innerHTML = "";
+  SPIConclusionResultElement.innerHTML = "";
+  ETCResultElement.innerHTML = "";
+  EACResultElement.innerHTML = "";
+  projectedBudgetOverrunResultElement.innerHTML = "";
 }
 
 function saveCalculationResultsIntoLS() {
@@ -215,6 +234,9 @@ submitButton.onclick = function (event) {
   // Reset giá trị cho tất cả các biến tính toán về bằng 0, bằng ""
   resetValueOfAllVariable();
 
+  // Ẩn đi tất cả các kết quả tính toán trước đó
+  resetCalculationResults();
+
   //#region 4 element nodelist
   scheduledProgressNodelist = document.querySelectorAll(
     ".scheduled-progress-input"
@@ -325,5 +347,11 @@ submitButton.onclick = function (event) {
       timeOut: 1000,
     });
   }
+
+  // Xoá tất cả dữ liệu trong ô input
+  clearAllInputValue();
+
+  // Reset giá trị cho tất cả các biến tính toán về bằng 0, bằng ""
+  resetValueOfAllVariable();
 };
 //#endregion
