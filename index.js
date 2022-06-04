@@ -91,6 +91,19 @@ function showCalculationResults() {
   projectedBudgetOverrunResultElement.innerHTML = `$${projectedBudgetOverrun} over budget`;
 }
 
+//delete only 1 task
+function handleClickDeleteTask(e) {
+  e.preventDefault();
+  let currentTaskNumberLS = localStorage.getItem("currentTaskNumber");
+  if (currentTaskNumberLS > 1) {
+    e.target.parentNode.remove();
+    localStorage.setItem("currentTaskNumber", currentTaskNumberLS - 1);
+  } else {
+  }
+}
+
+//delete all task
+
 function clearAllInputValue() {
   // 1. Get element
   scheduledProgressNodelist = document.querySelectorAll(
@@ -180,7 +193,6 @@ addNewTaskButton.onclick = function (event) {
   taskListElement.innerHTML += newTaskHTML;
 
   localStorage.setItem("currentTaskNumber", currentTaskNumber);
-  deleteTaskButtonList = document.querySelectorAll(".delete-task-btn");
 };
 //#endregion
 
