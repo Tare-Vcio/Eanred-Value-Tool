@@ -58,7 +58,7 @@ let projectedBudgetOverrunResultElement = document.querySelector(
 );
 //#endregion
 
-//#region Hàm resetValueOfAllVariable, showCalculationResults, clearAllInputValue
+//#region Hàm resetValueOfAllVariable, showCalculationResults, saveCalculationResultsIntoLS, clearAllInputValue
 function resetValueOfAllVariable() {
   totalBudget = 0;
   ACValue = 0;
@@ -89,6 +89,29 @@ function showCalculationResults() {
   ETCResultElement.innerHTML = `$${ETC}`;
   EACResultElement.innerHTML = `$${EAC}`;
   projectedBudgetOverrunResultElement.innerHTML = `$${projectedBudgetOverrun} over budget`;
+}
+
+function saveCalculationResultsIntoLS() {
+  const calculationResults = {
+    totalBudget: `$${totalBudget}`,
+    AC: `$${ACValue}`,
+    EV: `$${EVValue}`,
+    PV: `$${PVValue}`,
+    CPI: `${CPI}`,
+    costVariance: `${costVariance}%`,
+    CPIConclusion: `${CPIConclusion}`,
+    SPI: `${SPI}`,
+    scheduleVariance: `${scheduleVariance}%`,
+    SPIConclusion: `${SPIConclusion}`,
+    ETC: `$${ETC}`,
+    EAC: `$${EAC}`,
+    projectedBudgetOverrun: `$${projectedBudgetOverrun} over budget`,
+  };
+
+  localStorage.setItem(
+    "calculationResults",
+    JSON.stringify(calculationResults)
+  );
 }
 
 function clearAllInputValue() {
@@ -288,6 +311,8 @@ submitButton.onclick = function (event) {
 
       // Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
       showCalculationResults();
+      // Lưu kết quả tính toán vào localStorage
+      saveCalculationResultsIntoLS();
     } else {
       toastr.error(
         "Scheduled progress (Task #1) must be between 0% and 100%.",
