@@ -1,10 +1,10 @@
-"use strict";
-
-//#region 0. Khai báo biến
-//#region Element node
-const addNewTaskButton = document.querySelector("#add-new-task-btn");
-const submitButton = document.querySelector("#submit-btn");
-const taskListElement = document.querySelector("#task-list");
+//#region 1. Khai báo biến
+//#region Element dùng chung
+let clearAllButton = document.querySelector("#clear-all-btn");
+let addNewTaskButton = document.querySelector("#add-new-task-btn");
+let deleteTaskButtonList = document.querySelectorAll(".delete-task-btn");
+let submitButton = document.querySelector("#submit-btn");
+let taskListElement = document.querySelector("#task-list");
 //#endregion
 
 //#region Các biến chứa giá trị tính toán
@@ -58,7 +58,7 @@ let projectedBudgetOverrunResultElement = document.querySelector(
 );
 //#endregion
 
-//#region Hàm resetValueOfAllVariable(), showCalculationResults()
+//#region Hàm resetValueOfAllVariable, showCalculationResults, clearAllInputValue
 function resetValueOfAllVariable() {
   totalBudget = 0;
   ACValue = 0;
@@ -76,58 +76,41 @@ function resetValueOfAllVariable() {
 }
 
 function showCalculationResults() {
-  totalBudgetResultElement.innerHTML = ` $${totalBudget}`;
-  ACResultElement.innerHTML = ` $${ACValue}`;
-  EVResultElement.innerHTML = ` $${EVValue}`;
-  PVResultElement.innerHTML = ` $${PVValue}`;
-  CPIResultElement.innerHTML = ` ${CPI}`;
-  costVarianceResultElement.innerHTML = ` ${costVariance}%`;
-  CPIConclusionResultElement.innerHTML = ` ${CPIConclusion}`;
-  SPIResultElement.innerHTML = ` ${SPI}`;
-  scheduleVarianceResultElement.innerHTML = ` ${scheduleVariance}%`;
-  SPIConclusionResultElement.innerHTML = ` ${SPIConclusion}`;
-  ETCResultElement.innerHTML = ` $${ETC}`;
-  EACResultElement.innerHTML = ` $${EAC}`;
-  projectedBudgetOverrunResultElement.innerHTML = ` $${projectedBudgetOverrun} over budget`;
+  totalBudgetResultElement.innerHTML = `$${totalBudget}`;
+  ACResultElement.innerHTML = `$${ACValue}`;
+  EVResultElement.innerHTML = `$${EVValue}`;
+  PVResultElement.innerHTML = `$${PVValue}`;
+  CPIResultElement.innerHTML = `${CPI}`;
+  costVarianceResultElement.innerHTML = `${costVariance}%`;
+  CPIConclusionResultElement.innerHTML = `${CPIConclusion}`;
+  SPIResultElement.innerHTML = `${SPI}`;
+  scheduleVarianceResultElement.innerHTML = `${scheduleVariance}%`;
+  SPIConclusionResultElement.innerHTML = `${SPIConclusion}`;
+  ETCResultElement.innerHTML = `$${ETC}`;
+  EACResultElement.innerHTML = `$${EAC}`;
+  projectedBudgetOverrunResultElement.innerHTML = `$${projectedBudgetOverrun} over budget`;
+}
+
+function clearAllInputValue() {
+  // 1. Get element
+  scheduledProgressNodelist = document.querySelectorAll(
+    ".scheduled-progress-input"
+  );
+  actualProgressNodelist = document.querySelectorAll(".actual-progress-input");
+  budgetNodelist = document.querySelectorAll(".budget-input");
+  costNodelist = document.querySelectorAll(".cost-input");
+
+  // 2. Clear ...
+  Array.from(scheduledProgressNodelist).forEach(
+    (element) => (element.value = "")
+  );
+  Array.from(actualProgressNodelist).forEach((element) => (element.value = ""));
+  Array.from(budgetNodelist).forEach((element) => (element.value = ""));
+  Array.from(costNodelist).forEach((element) => (element.value = ""));
 }
 //#endregion
-//#endregion
 
-//#region 1. Xóa trường lưu số thứ tự task hiện tại trong localStorage
-localStorage.removeItem("currentTaskNumber");
-//#endregion
-
-//#region 2. LNSK click button "Add new task"
-addNewTaskButton.onclick = function (event) {
-  let currentTaskNumberLS = localStorage.getItem("currentTaskNumber");
-  let currentTaskNumber = currentTaskNumberLS ? Number(currentTaskNumberLS) : 1;
-
-  const newTaskHTML = `
-    <div class="task-item">
-      <h2 class="task-item__label">Task ${++currentTaskNumber}</h2>
-      <table class="task-item__table">
-        <tr>
-          <th>Scheduled progress (%)</th>
-          <th>Actual progress (%)</th>
-          <th>Budget ($)</th>
-          <th>Cost ($)</th>
-        </tr>
-        <tr>
-          <td><input type="text" class="scheduled-progress-input" onkeypress="handleNumber(event)"/></td>
-          <td><input type="text" class="actual-progress-input" onkeypress="handleNumber(event)" /></td>
-          <td><input type="text" class="budget-input" onkeypress="handleNumber(event)" /></td>
-          <td><input type="text" class="cost-input" onkeypress="handleNumber(event)" /></td>
-        </tr>
-      </table>
-    </div>
-  `;
-  taskListElement.innerHTML += newTaskHTML;
-
-  localStorage.setItem("currentTaskNumber", currentTaskNumber);
-};
-//#endregion
-
-//#region 3. Các hàm validate
+//#region Các hàm Validation
 function handleNumber(event) {
   const char = String.fromCharCode(event.which);
   if (!/[0-9]/.test(char) && char != ".") {
@@ -143,9 +126,68 @@ function handleInvalidFiled(array) {
   }
   return true;
 }
+
+function handlePercentFiled(array) {
+  for (let index = 0; index < array.length; index++) {
+    if (array[index] > 100) {
+      return false;
+    }
+  }
+  return true;
+}
+//#endregion
 //#endregion
 
-//#region 4. LNSK click button "SUBMIT"
+//#region 2. Config toastr
+// toastr.options = {
+//   progressBar: true,
+//   timeOut: "1000",
+//   hideMethod: "fadeOut",
+//   extendedTimeOut: "1000",
+//   positionClass: "toast-top-center",
+// };
+//#endregion
+
+//#region 3. Xóa trường lưu số thứ tự task hiện tại trong localStorage
+localStorage.removeItem("currentTaskNumber");
+//#endregion
+
+//#region 4. LNSK click button "Clear all"
+clearAllButton.onclick = function (event) {
+  clearAllInputValue();
+};
+//#endregion
+
+//#region 5. LNSK click button "Add new task"
+addNewTaskButton.onclick = function (event) {
+  let currentTaskNumberLS = localStorage.getItem("currentTaskNumber");
+  let currentTaskNumber = currentTaskNumberLS ? Number(currentTaskNumberLS) : 1;
+
+  const newTaskHTML = `
+    <div class="task-item">
+      <h2 class="task-item__label">Task ${++currentTaskNumber}</h2>
+      <table class="task-item__table">
+        <tr>
+          <td><input type="text" class="scheduled-progress-input" onkeypress="handleNumber(event)"/></td>
+          <td><input type="text" class="actual-progress-input" onkeypress="handleNumber(event)" /></td>
+          <td><input type="text" class="budget-input" onkeypress="handleNumber(event)" /></td>
+          <td><input type="text" class="cost-input" onkeypress="handleNumber(event)" /></td>
+        </tr>
+      </table>
+      <a class="delete-task-btn" href="" onclick="event.preventDefault(); this.parentNode.remove(); let lableElements = Array.from(document.querySelectorAll('.task-item > h2')); lableElements.forEach((h2, index) => h2.innerHTML = 'Task ' + (index+1)); localStorage.setItem('currentTaskNumber', lableElements.length);">X</a>
+    </div>
+  `;
+  taskListElement.innerHTML += newTaskHTML;
+
+  localStorage.setItem("currentTaskNumber", currentTaskNumber);
+  deleteTaskButtonList = document.querySelectorAll(".delete-task-btn");
+};
+//#endregion
+
+//#region 6. LNSK click icon X - "Delete task"
+//#endregion
+
+//#region 7. LNSK click button "Submit"
 submitButton.onclick = function (event) {
   // Reset giá trị cho tất cả các biến tính toán về bằng 0, bằng ""
   resetValueOfAllVariable();
@@ -172,75 +214,91 @@ submitButton.onclick = function (event) {
   costValues = Array.from(costNodelist).map((element) => Number(element.value));
   //#endregion
 
+  //#region Tính PV, AC, EV
+  const taskNumber = scheduledProgressValues.length;
   // Validation ...
   if (
     handleInvalidFiled(scheduledProgressValues) &&
     handleInvalidFiled(actualProgressValues) &&
     handleInvalidFiled(budgetValues) &&
     handleInvalidFiled(costValues)
-  ) {
-    //#region Tính PV, AC, EV
-    const taskNumber = scheduledProgressValues.length;
+  )
+    if (
+      handlePercentFiled(scheduledProgressValues) &&
+      handlePercentFiled(actualProgressValues)
+    ) {
+      for (let i = 0; i < taskNumber; i++) {
+        let PV = parseFloat(
+          (scheduledProgressValues[i] * parseFloat(budgetValues[i])) / 100
+        );
+        let AC = parseFloat(costValues[i]);
+        let EV = parseFloat(
+          (actualProgressValues[i] * parseFloat(budgetValues[i])) / 100
+        );
 
-    for (let i = 0; i < taskNumber; i++) {
-      let PV = parseFloat(
-        (scheduledProgressValues[i] * parseFloat(budgetValues[i])) / 100
-      );
-      let AC = parseFloat(costValues[i]);
-      let EV = parseFloat(
-        (actualProgressValues[i] * parseFloat(budgetValues[i])) / 100
-      );
+        PVs.push(PV);
+        ACs.push(AC);
+        EVs.push(EV);
+      }
 
-      PVs.push(PV);
-      ACs.push(AC);
-      EVs.push(EV);
+      PVValue = Number(
+        PVs.reduce((total, currentValue) => total + currentValue).toFixed(0)
+      );
+      ACValue = Number(
+        ACs.reduce((total, currentValue) => total + currentValue).toFixed(0)
+      );
+      EVValue = Number(
+        EVs.reduce((total, currentValue) => total + currentValue).toFixed(0)
+      );
+      //#endregion
+
+      //#region Tính CPI, SPI, CPIConclusion, SPIConclusion, Cost Variances, Schedule Variance
+      CPI = Number((EVValue / ACValue).toFixed(3));
+      SPI = Number((EVValue / PVValue).toFixed(3));
+
+      CPIConclusion =
+        CPI > 1
+          ? "Under Budget"
+          : CPI == 1
+          ? "Exactly on budget"
+          : "Over budget";
+      SPIConclusion =
+        CPI > 1
+          ? "Ahead of schedule"
+          : CPI == 1
+          ? "Exactly on schedule"
+          : "Behind schedule";
+
+      costVariance = Number((((EVValue - ACValue) * 100) / EVValue).toFixed(2));
+      scheduleVariance = Number(
+        (((EVValue - PVValue) * 100) / PVValue).toFixed(2)
+      );
+      //#endregion
+
+      //#region Tính TotalBudget, ETC, EAC, ProjectedBudgetOverrun
+      totalBudget = Number(
+        budgetValues
+          .reduce((total, currentValue) => total + currentValue)
+          .toFixed(0)
+      );
+      ETC = Number(((totalBudget - EVValue) / CPI).toFixed(0));
+      EAC = Number((ACValue + ETC).toFixed(0));
+      projectedBudgetOverrun = Number((EAC - totalBudget).toFixed(0));
+      //#endregion
+
+      // Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
+      showCalculationResults();
+    } else {
+      toastr.error(
+        "Scheduled progress (Task #1) must be between 0% and 100%.",
+        { timeOut: 1000, progressBar: true }
+      );
     }
-
-    PVValue = Number(
-      PVs.reduce((total, currentValue) => total + currentValue).toFixed(0)
-    );
-    ACValue = Number(
-      ACs.reduce((total, currentValue) => total + currentValue).toFixed(0)
-    );
-    EVValue = Number(
-      EVs.reduce((total, currentValue) => total + currentValue).toFixed(0)
-    );
-    //#endregion
-
-    //#region Tính CPI, SPI, CPIConclusion, SPIConclusion, Cost Variances, Schedule Variance
-    CPI = Number((EVValue / ACValue).toFixed(3));
-    SPI = Number((EVValue / PVValue).toFixed(3));
-
-    CPIConclusion =
-      CPI > 1 ? "Under Budget" : CPI == 1 ? "Exactly on budget" : "Over budget";
-    SPIConclusion =
-      CPI > 1
-        ? "Ahead of schedule"
-        : CPI == 1
-        ? "Exactly on schedule"
-        : "Behind schedule";
-
-    costVariance = Number((((EVValue - ACValue) * 100) / EVValue).toFixed(2));
-    scheduleVariance = Number(
-      (((EVValue - PVValue) * 100) / PVValue).toFixed(2)
-    );
-    //#endregion
-
-    //#region Tính TotalBudget, ETC, EAC, ProjectedBudgetOverrun
-    totalBudget = Number(
-      budgetValues
-        .reduce((total, currentValue) => total + currentValue)
-        .toFixed(0)
-    );
-    ETC = Number(((totalBudget - EVValue) / CPI).toFixed(0));
-    EAC = Number((ACValue + ETC).toFixed(0));
-    projectedBudgetOverrun = Number((EAC - totalBudget).toFixed(0));
-    //#endregion
-
-    // Hiển thị các giá trị tính toán được ra màn hình theo đúng vị trí
-    showCalculationResults();
-  } else {
-    alert("Please enter correct in all filed !!");
+  else {
+    toastr.error("Please enter all filed", {
+      progressBar: true,
+      timeOut: 1000,
+    });
   }
 };
 //#endregion
