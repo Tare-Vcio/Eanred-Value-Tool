@@ -46,12 +46,18 @@
               </tr>
 
             </table>
-            <a class="btnDelete" href="#">X</a>
+            <a
+                class="delete-task-btn"
+                href=""
+                onclick="handleDeleteTask(event)"
+                >X</a
+              >
           </div>
         </div>
         <div class="buttonHandle">
           <button id="submit-btn">Submit</button>
           <button id="add-new-task-btn">Add new task</button>
+          <button id="clear-all-btn">Clear all</button>
         </div>
         <div class="guide">
           <h5>Guide</h5>
@@ -204,7 +210,7 @@
     </section>
   </main>
   <footer class="footer">
-    <a data-fancybox data-type="pdf"  data-height="1000" href="./assets/image/pdf.pdf">Document Earned Value Analysis Tool</a>
+    <a target="_blank" data-fancybox data-type="pdf"  data-height="1000" href="./assets//image//group3.pdf">Document Earned Value Analysis Tool</a>
     <div class="icon">
       <a href="https://www.facebook.com/hdttuan">
         <i class="fa-brands fa-facebook"></i>
