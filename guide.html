@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earned Value Analysis Tool | Guide</title>
+  <link rel="stylesheet" href="./guideStyles.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <main>
+    <h1>Earned Value Tool</h1>
+    <div class="text_small">
+      <small>Created by: <b>K25_DTU_WEB_TEAM</b></small><br/>
+      <small>Version 1.0</small>
+    </div>
+    <nav class="container">
+      <ul>
+        <p class="menu">Table of contents:</p>
+        <li><a href="#guide1"><p>What is earned value management / earned value analysis?</p></a></li>
+        <li><a href="#guide3"><p>How to use the EVM calculator?</p></a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <p>Welcome to our <b>EVT(Earned Value Tool)</b>. Whether your project is building a skyscraper, hosting a wedding, or holding an office pizza party, applying <b>earned value management (EVM)</b> methodology will ensure you're on time and on budget. With the help of our EVM calculator, you'll get these insights and much more.
+        This accompanying article will cover <b>what earned value management is</b> and how to apply it in <b>project management</b>. We'll also discuss how to calculate earned value, planned value, and many other <b>project progress indicators</b>.</p>
+    </div>
+    <div id="guide1"class="container">
+      <h3>What is earned value management / earned value analysis?</h3>
+      <span><b>Earned value management</b>(sometimes called <b>earned value analysis</b>) is a project management methodology. It allows a project manager to <b>inspect a project's current status, measure its performance,</b> and <b>predict its final cost</b> and <b>completion date</b>. It has proven to be one of the most <b>powerful project management tools</b> out there:</span>
+      <ul>
+        <li><p>It's <b>flexible and scalable</b> — You can apply earned value management to any project of any size.</p></li>
+        <li><p>It's <b>robust and dynamic</b> — It can extract hidden, but valuable insights where projects are large and tasks are hard to interpret.</p></li>
+        <li><p>It's <b>reliable</b> — Studies have shown that, with EVM, you can predict your final expenditures within a 10% margin when you're just 20% of the way done with your project.</p></li>
+      </ul>
+    </div>
+    <div id="guide2"class="container">
+      <h3>How to use the EVM calculator?</h3>
+      <p>The bigger your project, the harder it's going to be performing all the <b>EVT calculations</b> by hand. That's why we made the EVM calculator, which will automatically perform EVM for you with the task data you give it. The tasks appear dynamically as you enter them. At the bottom, the EVM calculator will give you a detailed EVM report. If you're not sure what the calculator's results mean, read on!</p>
+    </div>
+    <div id="guide3"class="container">
+      <h3>What are the earned value management formulas?</h3>
+      <p>The earned value management process can be split into three steps: <b>collecting task information, evaluating performance</b>, and <b>making predictions</b> based on current knowledge. There are quite a few formulas involved; we'll explain them and what they represent as we go along.</p>
+      <div>
+        <h4>Step 1: Collecting task information</h4>
+        <p>At the start of the EVM process, we must look at all the tasks in our project and collect four data points for each task:</p>
+        <ul>
+          <li><p><b>Scheduled progress</b> or how much of this task was supposed to have been completed by now (given in percentage);</p></li>
+          <li><p><b>Actual progress</b>, or how much we've actually completed it (given in %);</p></li>
+          <li><p><b>Budget</b>, or how much money our project plan says we'll spend on it; and</p></li>
+          <li><p><b>Cost</b>, or how much money we've actually spent on it. Remember that the EVM doesn't take into account the time value of money.</p></li>
+        </ul>
+        <div>
+          <p>We must now calculate three important values for each task: <b>planned value, actual cost</b>, and <b>earned value</b>. Let's look at what these are:</p>
+          <ul>
+            <li><p><b>Planned value</b> (or "<b>budgeted cost of work scheduled</b>") represents how much value we had planned to achieve thus far. We can calculate the planned value of a task with:</p></li>
+            <p class="formula">PV = scheduled progress * budget</p>
+            <li><p><b>Actual cost</b> (or "<b>actual cost of work performed</b>") represents how much money we've spent thus far. If we have up-to-date expenditure information, we can simply state that:</p></li>
+            <p class="formula">AC = current costs.</p>
+            <li><p><b>Earned value</b> (or "<b>budgeted cost of work performed</b>") represents how much money's worth of progress we've achieved thus far. We can calculate a task's earned value with:</p></li>
+            <p class="formula">EV = actual progress * budget</p>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4>Step 2: Evaluating performance</h4>
+        <p>Once we have the <i>PV, AC,</i> and <i>EV</i>  for each task, we can combine them to <b>calculate the total PV, AC, and EV for our project as a whole</b>. Then we can go about <b>extracting useful information</b>about our project's performance.</p>
+        <p>First, we'll calculate our <b>cost performance index</b> with <i>CPI = EV / AC</i> and our <b>schedule performance index</b> with <i>SPI = EV / PV</i>. CPI tells us how our project's budget is doing:</p>
+        <ul>
+          <li><p>If <i>CPI > 1</i>, our project is <b>under budget</b>.</p></li>
+          <li><p>If <i>CPI < 1</i>, our project is <b>over budget.</b>.</p></li>
+          <li><p>If <i>CPI = 1</i>, our project is <b> exactly on budget.</b>.</p></li>
+        </ul>
+        <div>
+          <p>Similarly, SPI tells us how our project's schedule is doing:</p>
+          <ul>
+            <li><p>If <i>SPI > 1</i>, our project is <b>ahead of schedule.</b>.</p></li>
+            <li><p>If <i>SPI < 1</i>, our project is <b> behind schedule..</b>.</p></li>
+            <li><p>If <i>SPI = 1</i>, our project is <b> exactly on schedule.</b></p>.</li>
+          </ul>
+          <P>These performance indices are <b>ratios</b>. So, if <i>SPI = 2</i>, it means our time performance is double what was planned, i.e., we've completed our tasks twice as fast as we had planned.</P>
+          <P>Some project managers prefer to use the slightly different but equivalent <b>cost and schedule variances</b>. You can calculate these with cost variance = <i>(EV-AC)/EV</i> and <i>schedule variance = (EV-PV)/PV</i>. Here, <b> positive answers are good news:</b> if your cost variance is 20%, it means you're 20% under budget.</P>
+        </div>
+      </div>
+      <div>
+        <h4>Step 3: Making predictions</h4>
+        <p>We can take earned value management even further to<b> make predictions about our project's future:</b></p>
+        <ul>
+          <li><p>The <b>remaining cost of completing the project</b> is formally called "estimate to complete" or <i>ETC</i>. We can estimate it with:</p></li>
+          <p class="formula">ETC = (total budget - EV) / CPI</p>
+          <li><p>The <b>total cost of completing the project</b> is called "estimate at completion" or <i>EAC,</i> and we can estimate it with:</p></li>
+          <p class="formula">EAC = AC + ETC.</p>
+        </ul>
+        <p>By using <i>CPI</i> in the equation for <i>ETC</i>, we assume that our <b>current expenditure trend will be similar in the future</b>. <i>ETC</i> and <i>EAC</i> are therefore not infallible, but it's the best estimate we can make.</p>
+      </div>
+    </div>
+    <p class="link"><a href="./index.html">Start calculate</a></p>
+
+</body>
+
+</html>
